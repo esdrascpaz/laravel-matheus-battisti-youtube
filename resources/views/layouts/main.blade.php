@@ -41,10 +41,10 @@
 
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="/" class="nav-link">Eventos</a>
+                            <a href="/" class="nav-link">Event</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/eventos/criarEvento" class="nav-link">Criar eventos</a>
+                            <a href="/eventos/create" class="nav-link">Criar eventos</a>
                         </li>
                         <li class="nav-item">
                             <a href="/" class="nav-link">Entrar</a>

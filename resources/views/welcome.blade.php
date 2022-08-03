@@ -1,5 +1,3 @@
-{{-- Teste go github --}}
-
 {{-- Chamando o arquivo "main" na pasta "layouts" --}}
 @extends('layouts.main')
 
@@ -29,10 +27,12 @@ passando um texto como parâmetro para o título --}}
         <div id="cards-container" class="row">
             @foreach ($eventos as $evento)
                 <div class="card col-md-3">
+                    {{-- NÃO ESTÁ FUNCIONANDO !!! --}}
+                    <img src="/storage/app/public/events/{{ $evento->image }}" alt="{{ $evento->title }}">
                     <div class="card-date">27/05/2022</div>
                     <h5> {{ $evento->título }} </h5>
                     <p class="card-participantes">X Participantes</p>
-                    <a href="#" class="btn btn-primary">Saber mais</a>
+                    <a href="/events/{{ $evento->id }}" class="btn btn-primary">Saber mais</a>
                 </div>
             @endforeach
         </div>
