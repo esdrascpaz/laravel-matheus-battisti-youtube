@@ -11,25 +11,25 @@ class EventosController extends Controller
     // O nome da função não precisa ser esse
     public function index()
     {
-        $eventos = Event::all();
+        $events = Event::all();
 
         return view(
-            'welcome', ['eventos' => $eventos]
+            'welcome', ['events' => $events]
         );
     }
 
     public function create ()
     {
-        return view('eventos.create');
+        return view('events.create');
     }
 
     public function store(Request $request) {
         $event = new Event;
 
-        $event->título = $request->title;
+        $event->title = $request->title;
         $event->cidade = $request->cidade;
         $event->eventoPrivado = $request->private;
-        $event->descrição = $request->description;
+        $event->description = $request->description;
 
         //Upload imagem
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -56,5 +56,6 @@ class EventosController extends Controller
     public function show($id) {
         $event = Event::findOrFail($id);
 
+        return view('events.show', ['event' => $event]);
     }
 }

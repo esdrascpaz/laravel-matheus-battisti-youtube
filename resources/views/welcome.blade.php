@@ -25,14 +25,15 @@ passando um texto como parâmetro para o título --}}
         <h2>Próximos eventos</h2>
         <p class="subtitulo">Veja os eventos dos próximos dias</p>
         <div id="cards-container" class="row">
-            @foreach ($eventos as $evento)
+            @foreach ($events as $event)
                 <div class="card col-md-3">
                     {{-- NÃO ESTÁ FUNCIONANDO !!! --}}
-                    <img src="/storage/app/public/events/{{ $evento->image }}" alt="{{ $evento->title }}">
+                    <img src="/storage/app/public/events/{{ $event->image }}" alt="{{ $event->title }}">
                     <div class="card-date">27/05/2022</div>
-                    <h5> {{ $evento->título }} </h5>
+                    <h5> {{ $event->title }} </h5>
                     <p class="card-participantes">X Participantes</p>
-                    <a href="/events/{{ $evento->id }}" class="btn btn-primary">Saber mais</a>
+                    {{-- {{ dd($evento->id) }} --}}
+                    <a href="/events/{{ $event->id }}" class="btn btn-primary">Saber mais</a>
                 </div>
             @endforeach
         </div>

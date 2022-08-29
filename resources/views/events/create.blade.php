@@ -6,7 +6,7 @@
     <div id="event-create-container" class="col-md-6 offset-md-3">
         <h1>Crie um evento</h1>
         <!--"enctype": Necessário para enviar arquivos via formulário HTML-->
-        <form action="/eventos" method="POST" enctype="multipart/form-data">
+        <form action="/events" method="POST" enctype="multipart/form-data">
             {{-- Necessário essa diretiva (?) para
             permitir a submissão do formulário --}}
             @csrf
