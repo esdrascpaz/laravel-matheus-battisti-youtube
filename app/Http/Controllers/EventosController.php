@@ -24,10 +24,29 @@ class EventosController extends Controller
     }
 
     public function store(Request $request) {
+        $input = $request->validate([
+            'image' => 'file'
+        ]);
+
+        $file = $input['image'];
+        
+        $path = $file->store('image'); // Salvando na pasta storage/app/image
+        // use "store('image', 'public')" para criar uma pasta public/logos
+
+        // no terminal: php artisan storage:link
+
+        $input = [
+            'image' => $path,
+            'title' => $request->title,
+            'city' => $request->city,
+            'eventoPrivado' => $request->private,
+            'description' => $request->description
+        ];
+
         $event = new Event;
 
         $event->title = $request->title;
-        $event->cidade = $request->cidade;
+        $event->city = $request->city;
         $event->eventoPrivado = $request->private;
         $event->description = $request->description;
 
@@ -44,16 +63,20 @@ class EventosController extends Controller
             // var_dump($imageName);die;
             
             // $requestImage->move(public_path('img/eventos', $imageName));
-            $requestImage->store("events",'public');
+            // $requestImage->store("events",'public');
 
         }
 
         $event->save();
 
+        // Event::create($input);
+        // adicionado "image" no "fillable" na model Event
+
         return redirect('/') -> with('msg', 'Evento criado com sucesso');
     }
 
     public function show($id) {
+        // retorna o resultado ou falha ao buscar o id na tabela
         $event = Event::findOrFail($id);
 
         return view('events.show', ['event' => $event]);

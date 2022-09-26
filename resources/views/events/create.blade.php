@@ -7,6 +7,9 @@
         <h1>Crie um evento</h1>
         <!--"enctype": Necessário para enviar arquivos via formulário HTML-->
         <form action="/events" method="POST" enctype="multipart/form-data">
+            {{-- Foi criada a migration "2022_09_09_133653_add_field_to_events_table"
+            para o envio do path dessa imagem no banco --}}
+
             {{-- Necessário essa diretiva (?) para
             permitir a submissão do formulário --}}
             @csrf
@@ -33,8 +36,8 @@
                 <input 
                     type="text" 
                     class="form-control" 
-                    id="cidade" 
-                    name="cidade" 
+                    id="city" 
+                    name="city" 
                     placeholder="Nome da cidade">
             </div>
             <div class="form-group">
@@ -54,6 +57,26 @@
                 >
                 </textarea>
                 <input type="submit" value="Criar evento" class="btn btn-primary">
+            </div>
+            <div class="form-group">
+                <label for="title">Adicione itens de infraestrutura: </label>
+                <div class="form-group">
+                    {{-- A propriedade em name precisa estar com chaves para enviar
+                    mais de um item no input --}}
+                    <input type="checkbox" name="items[]" value="Cadeiras" id=""> Cadeiras
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Palco" id=""> Palco
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Cerveja grátis" id=""> Cerveja grátis
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Open food" id=""> Open food
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Brindes" id=""> Brindes
+                </div>
             </div>
         </form>
     </div>
