@@ -11,10 +11,28 @@ class EventosController extends Controller
     // O nome da função não precisa ser esse
     public function index()
     {
+        // Capturando o input de id search
+        // que está vindo da requisição
+        $search = request('search');
+
+        if ($search) {
+            $events = Event::where([
+                [
+                    // Faz uma busca com o termo
+                    // que veio da requisição
+                    'title',
+                    'like',
+                    '%'.$search.'%'
+                ]
+            ])->get();
+        } else {
+            $events = Event::all();
+        }
+        
         $events = Event::all();
 
         return view(
-            'welcome', ['events' => $events]
+            'welcome', ['events' => $events, 'search' => $search]
         );
     }
 
