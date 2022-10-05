@@ -29,13 +29,17 @@ passando um texto como parâmetro para o título --}}
                 <div class="card col-md-3">
                     {{-- NÃO ESTÁ FUNCIONANDO !!! --}}
                     <img src="/storage/app/public/events/{{ $event->image }}" alt="{{ $event->title }}">
-                    <div class="card-date">27/05/2022</div>
+                    <div class="card-date">{{ date('d/m/Y', strtotime($event->date)) }}</div>
                     <h5> {{ $event->title }} </h5>
                     <p class="card-participantes">X Participantes</p>
                     {{-- {{ dd($evento->id) }} --}}
                     <a href="/events/{{ $event->id }}" class="btn btn-primary">Saber mais</a>
                 </div>
             @endforeach
+
+            @if (count($events) == 0)
+                <p>Não há eventos disponíveis</p>
+            @endif
         </div>
     </div>
     {{-- Fim da section "contentBody" --}}

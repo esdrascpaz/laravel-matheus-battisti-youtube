@@ -32,6 +32,15 @@
                     placeholder="Nome do evento">
             </div>
             <div class="form-group">
+                <label for="date">Data do evento: </label>
+                <input 
+                    type="date" 
+                    class="form-control" 
+                    id="date" 
+                    name="date" 
+                    placeholder="Data do evento">
+            </div>
+            <div class="form-group">
                 <label for="title">Cidade: </label>
                 <input 
                     type="text" 
@@ -60,6 +69,8 @@
             </div>
             <div class="form-group">
                 <label for="title">Adicione itens de infraestrutura: </label>
+                {{-- A migration add_items_to_events_table foi criada para receber os itens[]
+                em "name" --}}
                 <div class="form-group">
                     {{-- A propriedade em name precisa estar com chaves para enviar
                     mais de um item no input --}}

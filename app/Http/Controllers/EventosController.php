@@ -24,19 +24,19 @@ class EventosController extends Controller
     }
 
     public function store(Request $request) {
-        $input = $request->validate([
-            'image' => 'file'
-        ]);
+        // $input = $request->validate([
+        //     'image' => 'file'
+        // ]);
 
-        $file = $input['image'];
+        // $file = $input['image'];
         
-        $path = $file->store('image'); // Salvando na pasta storage/app/image
-        // use "store('image', 'public')" para criar uma pasta public/logos
+        // $path = $file->store('image'); // Salvando na pasta storage/app/image
+        // // use "store('image', 'public')" para criar uma pasta public/logos
 
         // no terminal: php artisan storage:link
 
         $input = [
-            'image' => $path,
+            // 'image' => $path,
             'title' => $request->title,
             'city' => $request->city,
             'eventoPrivado' => $request->private,
@@ -46,21 +46,28 @@ class EventosController extends Controller
         $event = new Event;
 
         $event->title = $request->title;
+        // Foi criada uma migration para adicionar o campo data na tabela e
+        // feita uma alteração na model Event para indicar que o campo é do
+        // tipo data
+        $event->date = $request->date;
         $event->city = $request->city;
         $event->eventoPrivado = $request->private;
         $event->description = $request->description;
+        // No model Event, "items" será transformado em JSON, pois vem do front como string
+        $event->items = $request->items;
 
         //Upload imagem
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->image;
-
+            
             $extension = $requestImage->extension();
-
+            
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
             $event->image = $imageName;
+            
+            $request->file('image')->storeAs('img/eventos',$event->image);
 
-            // var_dump($imageName);die;
+            // // var_dump($imageName);die;
             
             // $requestImage->move(public_path('img/eventos', $imageName));
             // $requestImage->store("events",'public');
