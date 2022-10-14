@@ -5,7 +5,8 @@ use App\Http\Controllers\SeriesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [EventosController::class, 'index']);
-Route::get('/events/create', [EventosController::class, 'create']);
+// Rota só pode ser acessada por usuário autenticado
+Route::get('/events/create', [EventosController::class, 'create'])->middleware('auth');
 Route::get('/events/{id}', [EventosController::class, 'show']);
 // Action "store" por convenção
 Route::post('/events', [EventosController::class, 'store']);

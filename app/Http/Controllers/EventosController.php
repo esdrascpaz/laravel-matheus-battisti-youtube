@@ -90,6 +90,11 @@ class EventosController extends Controller
 
         }
 
+        // Acessando o usuário autenticado
+        $user = auth()->user();
+        // Adicionando o id ao criar o evento
+        $event->user_id = $user->id;
+
         $event->save();
 
         // Event::create($input);
