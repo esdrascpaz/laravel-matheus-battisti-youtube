@@ -41,17 +41,38 @@
 
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="/" class="nav-link">Event</a>
+                            <a href="/" class="nav-link">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/events/create" class="nav-link">Criar eventos</a>
+                            <a href="/events/create" class="nav-link">Criar evento</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/" class="nav-link">Entrar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/" class="nav-link">Cadastrar</a>
-                        </li>
+                        {{-- Diretiva blade onde o que está em "auth" é exibido para usuários autenticados --}}
+                        @auth
+                            <li class="nav-item">
+                                <form action="logout" method="post">
+                                    @csrf
+                                    <a 
+                                        href="/logout"
+                                        class="nav-link"
+                                        {{-- Evita o evento padrão do <a>, que seria ir para um link --}}
+                                        onclick="
+                                            event.preventDefault();
+                                            // Vai buscar o formulário mais próximo e submeter
+                                            this.closest('form').submit();"
+                                    >Sair</a>
+                                </form>
+                            </li>
+
+                        @endauth
+                        {{-- Diretiva blade onde o que está em "guest", é exibido para convidados não autenticados --}}
+                        @guest
+                            <li class="nav-item">
+                                <a href="/login" class="nav-link">Entrar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">Cadastrar</a>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </nav>
